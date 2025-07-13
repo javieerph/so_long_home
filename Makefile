@@ -1,49 +1,47 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    MAKEFILE                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/27 19:04:26 by ejavier-          #+#    #+#              #
-#    Updated: 2025/06/27 19:05:53 by ejavier-         ###   ########.fr        #
+#    Updated: 2025/07/11 20:09:36 by ejavier-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = so_long.a
+UNAME := $(shell uname)
+NAME := so_long
+CC := cc
+CFLAGS := -Wall -Wextra -Werror
+SRCS := main.c
+OBJS := $(SRCS:.c=.o)
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-INCLUDES = -Ilibft
+ifeq ($(UNAME), Linux)
+    INCLUDES := -Imlx
+    MLX_FLAGS := -Lmlx -lmlx -lXext -lX11 -lm
+    MLX_LIB := mlx/libmlx_Linux.a
+else
+    INCLUDES := -Imlx -I/opt/X11/include
+    MLX_FLAGS := -Lmlx -lmlx -framework OpenGL -framework AppKit
+    MLX_LIB := mlx/libmlx_Mac.a
+endif
 
-SRCS = ft_printf.c data_print.c data_type.c ft_itoa_base.c print_ptr.c\
-print_hexa.c
-OBJS = $(SRCS:.c=.o)
-
-AR = ar rcs
-RM = rm -f
-
-LIBFT = libft/libft.a
-
-all: $(LIBFT) $(NAME)
-
-$(LIBFT):
-	$(MAKE) -C libft
-	cp libft/libft.a .
-	mv libft.a $(NAME)
+all: $(MLX_LIB) $(NAME)
 
 $(NAME): $(OBJS)
-	$(AR) $(NAME) $(OBJS) libft/libft.a
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(MLX_FLAGS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-	
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+
+$(MLX_LIB):
+	@make -C mlx
+
 clean:
-	$(RM) $(OBJS)
-	$(MAKE) -C libft clean
+	rm -f $(OBJS) $(NAME)
 
 fclean: clean
-	$(RM) $(NAME)
-	$(MAKE) -C libft fclean
+	@make -C mlx clean
 
 re: fclean all
