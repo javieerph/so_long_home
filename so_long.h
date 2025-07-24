@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 12:51:59 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/07/13 18:28:24 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/07/17 20:44:42 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "mlx/mlx.h"
 # include <stdlib.h>
 # include <stdio.h>
+# include <fcntl.h>
 # include "libft/libft.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
@@ -76,15 +77,52 @@ typedef struct s_data
 	t_img	*img;
 }				t_data;
 
-/* ********** Check map ********** */
+/* ********** Main and key_hook ********** */
+
+void	free_double_pointer(t_data *data);
+int	ft_key_hook(int keycode, t_data *data);
+void	handle_error(t_data *data, char *str, int num);
+int	ft_exit(t_data *data);
+void	check_filename(char *file_name);
+
+/* ********** Map functions ********** */
+
+void	window_size(t_data *data, char **argv);
+void	create_map(t_data *data);
+
+/* ********** Place images ********** */
+
+void	put_background(t_data *data);
+void	put_object(t_data *data, char *relative_path);
+void	put_player(t_data *data);
+
+/* ********** Initializer ********** */
+
+void	ft_initializer(t_data *data, t_map *map);
+
+
+/* ********** Check_valid_path ********** */
 
 int	e_valid_path(t_data *data, int x, int y, char **visited);
 int	c_valid_path(t_data *data, int x, int y, char **visited);
-static void	fill_visited(char ***visited, t_data *data);
 void	check_path_of_collectables(t_data *data, int x, int y);
 void	check_path(t_data *data);
 void	find_px_py(t_data *data);
 void	free_double_p(char ***str);
 void	calloc_failure(char *str);
+
+/* ********** Validate_input ********** */
+
+void	ft_check_content(t_data *data);
+void	validate_input(t_data *data, char **argv, int argc);
+
+/* ********** Victory ********** */
+
+void	winner(t_data *data);
+
+/* ********** Move functions ********** */
+
+void	ft_move(t_data *data, char pos, int dir);
+
 
 #endif

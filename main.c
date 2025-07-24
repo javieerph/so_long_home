@@ -6,56 +6,74 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 22:37:41 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/07/11 20:35:52 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/07/15 20:12:49 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <X11/X.h>
-#include <X11/keysym.h>
+#include "so_long.h"
 
-typedef struct s_data
+void	handle_error(t_data *data, char *str, int num)
 {
-	void *mlx_ptr;
-	void *win_ptr;
-} t_data;
+	if (num)
+		free_double_pointer(data);
+	ft_putstr_fd(str, 2);
+	exit(EXIT_FAILURE);
+}
 
-int on_destroy(t_data *data)
+int	ft_exit(t_data *data)
 {
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
-	exit(0);
+	mlx_destroy_window(data->mlx, data->win);
+	printf("--------------------------------------------------\n");
+	printf("|              You gave up :(                    |\n");
+	printf("|   Is the game hard for you? Try again......    |\n");
+	printf("--------------------------------------------------\n");
+	free_double_pointer(data);
+	exit(EXIT_SUCCESS);
+}
+
+static int	ft_render_next_frame(t_data *data)
+/* I made this function to check for keyboard or mouse input */
+{
+	put_background(data);
+	create_map(data);
+	mlx_hook(data->win, 17, 1L << 2, ft_exit, data);
+	mlx_key_hook(data->win, ft_key_hook, data);
 	return (0);
 }
 
-int on_keypress(int keysym, t_data *data)
+void	check_filename(char *file_name)
 {
-	(void)data;
-	printf("Pressed key: %d\\n", keysym);
-	return (0);
+	file_name = file_name + (ft_strlen(file_name) - 4);
+	if (ft_strncmp(file_name, ".ber", 4))
+	{
+		write(2, "Error!\n Wrong file extension", 28);
+		exit(1);
+	}
 }
 
-int main(void)
+int	main(int argc, char **argv)
 {
-	t_data data;
+	t_data	data;
+	t_map	map;
 
-	data.mlx_ptr = mlx_init();
-	if (!data.mlx_ptr)
-		return (1);
-	data.win_ptr = mlx_new_window(data.mlx_ptr, 600, 400, "hola a pedaso.com necesitamos un jugador para jugar");
-	if (!data.win_ptr)
-		return (free(data.mlx_ptr), 1);
-
-	// Register key release hook
-	mlx_hook(data.win_ptr, KeyRelease, KeyReleaseMask, &on_keypress, &data);
-
-	// Register destroy hook
-	mlx_hook(data.win_ptr, DestroyNotify, StructureNotifyMask, &on_destroy, &data);
-
-	// Loop over the MLX pointer
-	mlx_loop(data.mlx_ptr);
-	return (0);
+	window_size(&data, argv);
+	check_filename(argv[1]);
+	map.map = ft_calloc(data.size_y + 1, sizeof(char *));
+	if (!map.map)
+		calloc_failure("Error\ncalloc failed\n");
+	ft_initializer(&data, &map);
+	validate_input(&data, argv, argc);
+	check_path(&data);
+	data.mlx = mlx_init();
+	if (!data.mlx)
+	{
+		perror("Error\nprogram initialization failed\n");
+		exit(EXIT_FAILURE);
+	}
+	data.win = mlx_new_window(data.mlx, data.size_x,
+			data.size_y, "By Simon Zerisenay");
+	ft_render_next_frame(&data);
+	mlx_loop(data.mlx);
+	perror("Error\nProgramme failed to loop\n");
+	exit(EXIT_FAILURE);
 }

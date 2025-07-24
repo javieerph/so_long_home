@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 17:07:13 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/04/25 10:52:54 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/07/17 21:10:17 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdint.h>
+# include <stdio.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -51,5 +56,10 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+char	*read_file(int fd, char *str);
+char	*get_next_line(int fd);
+char	*ft_next(char *buffer);
+char	*ft_line(char *buffer);
+
 
 #endif
