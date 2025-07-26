@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 20:18:47 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/07/15 20:19:04 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/07/26 07:21:11 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ void	free_double_pointer(t_data *data)
 
 int	ft_key_hook(int keycode, t_data *data)
 {
-	if (keycode == ESC)
+	if (keycode == XK_Escape)
 		ft_exit(data);
-	else if (keycode == W || keycode == UARROW)
+	else if (keycode == 'w' || keycode == XK_Up)
 		ft_move(data, 'y', UP);
-	else if (keycode == A || keycode == LARROW)
+	else if (keycode == 'a' || keycode == XK_Left)
 		ft_move(data, 'x', LEFT);
-	else if (keycode == S || keycode == DARROW)
+	else if (keycode == 's' || keycode == XK_Down)
 		ft_move(data, 'y', DOWN);
-	else if (keycode == D || keycode == RARROW)
+	else if (keycode == 'd' || keycode == XK_Right)
 		ft_move(data, 'x', RIGHT);
 	if (data->map->map[data->p_y][data->p_x] == 'E')
 		winner(data);

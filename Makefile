@@ -6,7 +6,7 @@
 #    By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/27 19:04:26 by ejavier-          #+#    #+#              #
-#    Updated: 2025/07/17 20:43:53 by ejavier-         ###   ########.fr        #
+#    Updated: 2025/07/26 00:28:23 by ejavier-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,21 +31,30 @@ else
     MLX_LIB := mlx/libmlx_Mac.a
 endif
 
-all: $(MLX_LIB) $(NAME)
+LIBFT = libft/libft.a
+
+all: $(MLX_LIB) $(LIBFT) $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(MLX_FLAGS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(MLX_FLAGS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(MLX_LIB):
-	@make -C mlx
+	$(MAKE) -C mlx
+
+$(LIBFT):
+	$(MAKE) -C libft
 
 clean:
-	rm -f $(OBJS) $(NAME)
-
+	$(RM) $(OBJS)
+	$(MAKE) -C mlx clean
+	$(MAKE) -C libft clean
+   
 fclean: clean
-	@make -C mlx clean
+	$(RM) $(NAME)
+	$(MAKE) -C mlx clean
+	$(MAKE) -C libft fclean
 
 re: fclean all

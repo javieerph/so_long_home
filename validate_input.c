@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 20:26:45 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/07/17 20:28:01 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/07/26 06:00:15 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,38 +66,48 @@ static void	ft_check_content(t_data *data)
 		handle_error(data, "Error\nNo potion to collect\n", 1);
 }
 
-static void	ft_input_error(t_data *data, int argc)
-{
-	if (argc != 2)
-	{
-		handle_error(data, "Error\nUsage: './so_long mappath/mapname.ber'\n", 1);
-		exit(EXIT_FAILURE);
-	}
-}
-
 void	validate_input(t_data *data, char **argv, int argc)
-/* will translate the .ber file into a 2-dimensional array of char * */
 {
 	int		fd;
+	char	*line;
 	int		i;
-	int		bytes;
-	char	buffer[2];
+	char	*file;
 
-	ft_input_error(data, argc);
-	i = 0;
-	bytes = 1;
-	buffer[1] = '\0';
-	fd = open(argv[1], O_RDONLY);
-	while (bytes == 1)
-	{
-		bytes = read(fd, buffer, 1);
-		if (bytes != 1)
-			break ;
-		if (buffer[0] != '\n' && buffer[0] != '\0')
-			data->map->map[i] = ft_strjoin(data->map->map[i], buffer);
-		else
-			i++;
-	}
+    if (argc != 2)
+    {
+        ft_putstr_fd("Usage: ./so_long <map_file>\n", 2);
+        exit(EXIT_FAILURE);
+    }
+	
+	file = argv[1];
+	fd = open(file, O_RDONLY);
+    if (fd < 0)
+    {
+        perror("Error\nFailed to open file");
+        exit(EXIT_FAILURE);
+    }
+
+    data->map->map = malloc(sizeof(char *) * 1000);
+    if (!data->map->map)
+    {
+        ft_putstr_fd("Error\nMemory allocation failed\n", 2);
+        close(fd);
+        exit(EXIT_FAILURE);
+    }
+
+    // Reading line by line
+    i = 0;
+    while ((line = get_next_line(fd)))
+    {
+        data->map->map[i++] = ft_strtrim(line, "\n"); // Elimina el salto de línea
+        free(line);
+    } 
+	data->map->map[i] = NULL; // to finish array
+	close(fd);
+
+	data->size_y = i * IMG_H;
+    data->size_x = ft_strlen(data->map->map[0]) * IMG_W;
+	
 	if (data->size_x / IMG_H == i)
 		handle_error(data, "Error\nWrong map dimensions", 1);
 	ft_check_content(data);

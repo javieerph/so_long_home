@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 12:51:59 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/07/17 20:44:42 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/07/26 07:07:58 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 
 /* ********** defines ********** */
 
-# define IMG_W 32
-# define IMG_H 32
+# define IMG_W 34
+# define IMG_H 44
 # define ESC 53
 # define W 13
 # define A 0
@@ -107,13 +107,16 @@ int	e_valid_path(t_data *data, int x, int y, char **visited);
 int	c_valid_path(t_data *data, int x, int y, char **visited);
 void	check_path_of_collectables(t_data *data, int x, int y);
 void	check_path(t_data *data);
+
+/* ********** Helpers ********** */
+
 void	find_px_py(t_data *data);
 void	free_double_p(char ***str);
 void	calloc_failure(char *str);
+int	ft_count_c(char *s, char c);
 
 /* ********** Validate_input ********** */
 
-void	ft_check_content(t_data *data);
 void	validate_input(t_data *data, char **argv, int argc);
 
 /* ********** Victory ********** */

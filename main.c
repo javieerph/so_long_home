@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 22:37:41 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/07/15 20:12:49 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/07/26 04:41:26 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,15 @@ void	handle_error(t_data *data, char *str, int num)
 int	ft_exit(t_data *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
-	printf("--------------------------------------------------\n");
-	printf("|              You gave up :(                    |\n");
-	printf("|   Is the game hard for you? Try again......    |\n");
-	printf("--------------------------------------------------\n");
+	printf("==================================================\n");
+	printf("|              !You gave up!                     |\n");
+	printf("|             You can try again......            |\n");
+	printf("==================================================\n");
 	free_double_pointer(data);
 	exit(EXIT_SUCCESS);
 }
 
 static int	ft_render_next_frame(t_data *data)
-/* I made this function to check for keyboard or mouse input */
 {
 	put_background(data);
 	create_map(data);
@@ -56,6 +55,13 @@ int	main(int argc, char **argv)
 	t_data	data;
 	t_map	map;
 
+	data.mlx = mlx_init();
+	if (!data.mlx)
+	{
+		perror("Error\nprogram initialization failed\n");
+		exit(EXIT_FAILURE);
+	}
+	
 	window_size(&data, argv);
 	check_filename(argv[1]);
 	map.map = ft_calloc(data.size_y + 1, sizeof(char *));
@@ -64,14 +70,9 @@ int	main(int argc, char **argv)
 	ft_initializer(&data, &map);
 	validate_input(&data, argv, argc);
 	check_path(&data);
-	data.mlx = mlx_init();
-	if (!data.mlx)
-	{
-		perror("Error\nprogram initialization failed\n");
-		exit(EXIT_FAILURE);
-	}
+	
 	data.win = mlx_new_window(data.mlx, data.size_x,
-			data.size_y, "By Simon Zerisenay");
+			data.size_y, "By Edgar Romero");		
 	ft_render_next_frame(&data);
 	mlx_loop(data.mlx);
 	perror("Error\nProgramme failed to loop\n");

@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 20:41:42 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/07/15 20:56:44 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/07/26 07:31:16 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_initializer(t_data *data, t_map *map)
 		exit(EXIT_FAILURE);
 	}
 	data->img = img;
-	relative_path = "assets/pup.xpm";
+	relative_path = "./assets/pup.xpm";
 	data->img->player_up = mlx_xpm_file_to_image(data->mlx, relative_path,
 			&img_width, &img_height);
 	if (!data->img->player_up)

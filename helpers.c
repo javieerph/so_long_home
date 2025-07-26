@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 18:16:40 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/07/13 18:17:00 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/07/25 22:54:57 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,21 @@ void	calloc_failure(char *str)
 {
 	perror(str);
 	exit(EXIT_FAILURE);
+}
+
+int	ft_count_c(char *s, char c)
+{
+	int	i;
+	int	x;
+
+	i = 0;
+	x = 0;
+	if (!s)
+		return (-1);
+	while (s && s[i])
+	{
+		if (s[i++] == c)
+			x++;
+	}
+	return (x);
 }
