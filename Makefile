@@ -6,7 +6,7 @@
 #    By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/27 19:04:26 by ejavier-          #+#    #+#              #
-#    Updated: 2025/07/26 00:28:23 by ejavier-         ###   ########.fr        #
+#    Updated: 2025/07/26 10:06:48 by ejavier-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ UNAME := $(shell uname)
 NAME := so_long
 CC := cc
 CFLAGS := -Wall -Wextra -Werror
+MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 SRCS := main.c check_valid_path.c helpers.c \
         initializer.c key_hook.c map.c \
         place_images.c validate_input.c victory.c \
@@ -32,6 +33,14 @@ else
 endif
 
 LIBFT = libft/libft.a
+
+Y = "\033[33m"
+R = "\033[31m"
+G = "\033[32m"
+B = "\033[34m"
+X = "\033[0m"
+UP = "\033[A"
+CUT = "\033[K"
 
 all: $(MLX_LIB) $(LIBFT) $(NAME)
 
