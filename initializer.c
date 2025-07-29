@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 20:41:42 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/07/26 07:31:16 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/07/28 20:36:54 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_initializer_help(t_data *data)
 	relative_path = "./assets/pleft.xpm";
 	data->img->player_left = mlx_xpm_file_to_image(data->mlx, relative_path,
 			&img_width, &img_height);
-	relative_path = "./assets/p1.xpm";
+	relative_path = "./assets/pleft.xpm";
 	data->img->player_down = mlx_xpm_file_to_image(data->mlx, relative_path,
 			&img_width, &img_height);
 	relative_path = "./assets/pright.xpm";

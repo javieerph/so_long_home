@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 20:24:58 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/07/26 11:13:13 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/07/28 20:11:00 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	create_map(t_data *data)
 		if (data->map->map[data->map->y][data->map->x] == 'P')
 			put_player(data);
 		else if (data->map->map[data->map->y][data->map->x] == '1')
-			put_object(data, "./assets/rock.xpm");
+			put_object(data, "./assets/obstacle.xpm");
 		else if (data->map->map[data->map->y][data->map->x] == 'C')
 			put_object(data, "./assets/potion.xpm");
 		else if (data->map->map[data->map->y][data->map->x] == 'E')
