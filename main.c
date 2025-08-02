@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 22:37:41 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/08/02 09:12:25 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/08/02 10:25:15 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,12 @@ int	ft_exit(t_data *data)
 	ft_printf("|              !You gave up!                     |\n");
 	ft_printf("|             You can try again......            |\n");
 	ft_printf("==================================================\n");
-	free_game(data);
+	if (data)
+	{
+		free_game(data);
+		if(data->map)
+			ft_free_map(data->map);
+	}
 	exit(EXIT_SUCCESS);
 }
 
@@ -65,6 +70,7 @@ int	main(int argc, char **argv)
 	map = ft_calloc(1, sizeof(t_map));
 	if (!map)
 		calloc_failure("Error\ncalloc failed\n");
+	data.map = map;
 	map->map = ft_calloc(data.size_y + 1, sizeof(char *));
 	if (!map->map)
     	calloc_failure("Error\ncalloc failed\n");

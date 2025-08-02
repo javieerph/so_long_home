@@ -6,14 +6,13 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 20:43:01 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/08/02 03:04:35 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/08/02 09:40:11 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 static void	ft_player_move(t_data *data, char position, int direction)
-/* will put the correct orientation of the spaceship on the screen */
 {
 	if (position == 'y' && direction == UP)
 	{
@@ -47,7 +46,6 @@ static void	ft_collect(t_data *data, char pos, int dir)
 }
 
 void	ft_move(t_data *data, char pos, int dir)
-/* will check if a move is valid and move the player if valid */
 {
 	mlx_put_image_to_window(data->mlx, data->win, data->img->background,
 		(data->p_x * IMG_W), (data->p_y * IMG_H));

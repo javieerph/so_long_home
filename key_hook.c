@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 20:18:47 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/08/02 08:38:04 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/08/02 10:42:43 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,6 @@ void    free_game(t_data *data)
         free(data->img);
 		data->img = NULL;
     }
-	if (data->win)
-	{
-        mlx_destroy_window(data->mlx, data->win);
-		data->win = NULL;
-	}
-    if (data->mlx)
-    {
-        mlx_destroy_display(data->mlx);
-        free(data->mlx);
-    }
 	if (data->map)
 	{
     	if (data->map->map)
@@ -54,7 +44,35 @@ void    free_game(t_data *data)
     	free(data->map);
     	data->map = NULL;
 	}
-	
+	if (data->win)
+	{
+        mlx_destroy_window(data->mlx, data->win);
+		data->win = NULL;
+	}
+    if (data->mlx)
+    {
+        mlx_destroy_display(data->mlx);
+        free(data->mlx);
+    }
+}
+
+void    ft_free_map(t_map *map)
+{
+    int i = 0;
+
+    if (!map)
+        return;
+
+    if (map->map)
+    {
+        while (map->map[i])
+        {
+            free(map->map[i]);
+            i++;
+        }
+        free(map->map);
+    }
+    free(map);
 }
 
 int	ft_key_hook(int keycode, t_data *data)

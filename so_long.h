@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 12:51:59 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/08/02 08:17:25 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/08/02 10:11:54 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int		ft_key_hook(int keycode, t_data *data);
 void	handle_error(t_data *data, char *str, int num);
 int		ft_exit(t_data *data);
 void	check_filename(char *file_name);
+void    ft_free_map(t_map *map);
 
 /* ********** Map functions ********** */
 

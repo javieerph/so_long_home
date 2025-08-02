@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 20:24:58 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/08/02 08:58:08 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/08/02 10:04:49 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	ft_count_lines(int fd, int x, int img_w)
 }
 
 void	window_size(t_data *data, char **argv)
-/* This function will find the window size and check for some errors */
 {
 	int	fd;
 
