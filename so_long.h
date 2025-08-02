@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 12:51:59 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/07/26 07:07:58 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/08/02 03:48:55 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ typedef struct s_data
 /* ********** Main and key_hook ********** */
 
 void	free_double_pointer(t_data *data);
-int	ft_key_hook(int keycode, t_data *data);
+int		ft_key_hook(int keycode, t_data *data);
 void	handle_error(t_data *data, char *str, int num);
-int	ft_exit(t_data *data);
+int		ft_exit(t_data *data);
 void	check_filename(char *file_name);
 
 /* ********** Map functions ********** */
@@ -100,11 +100,10 @@ void	put_player(t_data *data);
 
 void	ft_initializer(t_data *data, t_map *map);
 
-
 /* ********** Check_valid_path ********** */
 
-int	e_valid_path(t_data *data, int x, int y, char **visited);
-int	c_valid_path(t_data *data, int x, int y, char **visited);
+int		e_valid_path(t_data *data, int x, int y, char **visited);
+int		c_valid_path(t_data *data, int x, int y, char **visited);
 void	check_path_of_collectables(t_data *data, int x, int y);
 void	check_path(t_data *data);
 
@@ -113,7 +112,7 @@ void	check_path(t_data *data);
 void	find_px_py(t_data *data);
 void	free_double_p(char ***str);
 void	calloc_failure(char *str);
-int	ft_count_c(char *s, char c);
+int		ft_count_c(char *s, char c);
 
 /* ********** Validate_input ********** */
 
@@ -126,6 +125,5 @@ void	winner(t_data *data);
 /* ********** Move functions ********** */
 
 void	ft_move(t_data *data, char pos, int dir);
-
 
 #endif

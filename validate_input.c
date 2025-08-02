@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 20:26:45 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/07/26 06:00:15 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/08/02 03:57:30 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,49 +66,54 @@ static void	ft_check_content(t_data *data)
 		handle_error(data, "Error\nNo potion to collect\n", 1);
 }
 
-void	validate_input(t_data *data, char **argv, int argc)
+static void	ft_open_and_allocate(t_data *data, char *file, int *fd)
 {
-	int		fd;
+	*fd = open(file, O_RDONLY);
+	if (*fd < 0)
+	{
+		perror("Error\nFailed to open file");
+		exit(EXIT_FAILURE);
+	}
+	data->map->map = malloc(sizeof(char *) * 1000);
+	if (!data->map->map)
+	{
+		ft_putstr_fd("Error\nMemory allocation failed\n", 2);
+		close(*fd);
+		exit(EXIT_FAILURE);
+	}
+}
+
+static void	ft_read_map(t_data *data, int fd)
+{
 	char	*line;
 	int		i;
-	char	*file;
 
-    if (argc != 2)
-    {
-        ft_putstr_fd("Usage: ./so_long <map_file>\n", 2);
-        exit(EXIT_FAILURE);
-    }
-	
-	file = argv[1];
-	fd = open(file, O_RDONLY);
-    if (fd < 0)
-    {
-        perror("Error\nFailed to open file");
-        exit(EXIT_FAILURE);
-    }
-
-    data->map->map = malloc(sizeof(char *) * 1000);
-    if (!data->map->map)
-    {
-        ft_putstr_fd("Error\nMemory allocation failed\n", 2);
-        close(fd);
-        exit(EXIT_FAILURE);
-    }
-
-    // Reading line by line
-    i = 0;
-    while ((line = get_next_line(fd)))
-    {
-        data->map->map[i++] = ft_strtrim(line, "\n"); // Elimina el salto de línea
-        free(line);
-    } 
-	data->map->map[i] = NULL; // to finish array
-	close(fd);
-
+	i = 0;
+	line = get_next_line(fd);
+	while (line)
+	{
+		data->map->map[i++] = ft_strtrim(line, "\n");
+		free(line);
+		line = get_next_line(fd);
+	}
+	data->map->map[i] = NULL;
 	data->size_y = i * IMG_H;
-    data->size_x = ft_strlen(data->map->map[0]) * IMG_W;
-	
-	if (data->size_x / IMG_H == i)
+	data->size_x = ft_strlen(data->map->map[0]) * IMG_W;
+	close(fd);
+}
+
+void	validate_input(t_data *data, char **argv, int argc)
+{
+	int	fd;
+
+	if (argc != 2)
+	{
+		ft_putstr_fd("Usage: ./so_long <map_file>\n", 2);
+		exit(EXIT_FAILURE);
+	}
+	ft_open_and_allocate(data, argv[1], &fd);
+	ft_read_map(data, fd);
+	if (data->size_x / IMG_H == data->size_y / IMG_H)
 		handle_error(data, "Error\nWrong map dimensions", 1);
 	ft_check_content(data);
 	ft_check_borders(data);

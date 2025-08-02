@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 22:37:41 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/07/26 04:41:26 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/08/02 03:00:59 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	main(int argc, char **argv)
 		perror("Error\nprogram initialization failed\n");
 		exit(EXIT_FAILURE);
 	}
-	
 	window_size(&data, argv);
 	check_filename(argv[1]);
 	map.map = ft_calloc(data.size_y + 1, sizeof(char *));
@@ -70,9 +69,8 @@ int	main(int argc, char **argv)
 	ft_initializer(&data, &map);
 	validate_input(&data, argv, argc);
 	check_path(&data);
-	
-	data.win = mlx_new_window(data.mlx, data.size_x,
-			data.size_y, "By Edgar Romero");		
+	data.win = mlx_new_window(data.mlx, data.size_x, data.size_y,
+			"By Edgar Romero");
 	ft_render_next_frame(&data);
 	mlx_loop(data.mlx);
 	perror("Error\nProgramme failed to loop\n");

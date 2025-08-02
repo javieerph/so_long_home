@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   check_valid_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 12:50:06 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/07/13 12:50:30 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/08/02 02:50:25 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	check_path_of_collectables(t_data *data, int x, int y)
 				visited[data->size_y] = 0;
 				fill_visited(&visited, data);
 				if (!c_valid_path(data, x, y, visited))
-					handle_error(data, "Error!\n No path for collectable.\n", 1);
+					handle_error(data, "Error!\n No path for potions.\n", 1);
 				free_double_p(&visited);
 			}
 			x++;

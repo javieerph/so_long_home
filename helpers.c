@@ -6,13 +6,13 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 18:16:40 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/07/25 22:54:57 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/08/02 02:53:34 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-  
-void	find_px_py(t_data *data)  
+
+void	find_px_py(t_data *data)
 {
 	int	x;
 	int	y;
@@ -30,7 +30,7 @@ void	find_px_py(t_data *data)
 			}
 			x++;
 		}
-	y++;
+		y++;
 	}
 }
 
