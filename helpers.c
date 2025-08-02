@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 18:16:40 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/08/02 02:53:34 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/08/02 07:01:29 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,21 @@ void	find_px_py(t_data *data)
 	}
 }
 
-void	free_double_p(char ***str)
+void    free_double_p(char ***str)
 {
-	int	i;
+    int i;
 
-	i = 0;
-	while ((*str)[i])
-		i++;
-	i--;
-	while (i >= 0)
-		free((*str)[i--]);
-	free((*str));
+    if (!str || !(*str))
+        return;
+    i = 0;
+    while ((*str)[i])
+    {
+        free((*str)[i]);
+        (*str)[i] = NULL;
+        i++;
+    }
+    free(*str);
+    *str = NULL;
 }
 
 void	calloc_failure(char *str)

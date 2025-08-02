@@ -1,26 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/17 20:39:30 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/08/02 08:06:56 by ejavier-         ###   ########.fr       */
+/*   Created: 2025/05/03 03:43:40 by ejavier-          #+#    #+#             */
+/*   Updated: 2025/08/02 08:45:22 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nelem, size_t elsize)
+char	*ft_itoa_base(unsigned long num, int base)
 {
-	void	*ptr;
+	char			*str;
+	char			*digits;
+	int				len;
+	unsigned long	temp;
 
-	if (elsize != 0 && nelem > SIZE_MAX / elsize)
+	digits = "0123456789abcdef";
+	len = 0;
+	temp = num;
+	while (temp && ++len)
+		temp /= base;
+	if (num == 0)
+		len = 1;
+	str = (char *)ft_calloc((len + 1), sizeof(char));
+	if (!str)
 		return (NULL);
-	ptr = malloc(nelem * elsize);
-	if (ptr == NULL)
-		return (NULL);
-	ft_bzero(ptr, (nelem * elsize));
-	return (ptr);
+	str[len] = '\0';
+	while (len--)
+	{
+		str[len] = digits[num % base];
+		num /= base;
+	}
+	return (str);
 }

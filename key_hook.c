@@ -6,23 +6,55 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 20:18:47 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/08/02 02:54:59 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/08/02 08:38:04 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	free_double_pointer(t_data *data)
+void    free_game(t_data *data)
 {
-	int	i;
+    int i;
 
-	i = 0;
-	while (data->map->map[i])
-		i++;
-	while (i >= 0)
-		free(data->map->map[i--]);
-	free(data->map->map);
-	free(data->img);
+    if (data->img)
+    {
+        if (data->img->player_up)
+            mlx_destroy_image(data->mlx, data->img->player_up);
+        if (data->img->player_left)
+            mlx_destroy_image(data->mlx, data->img->player_left);
+        if (data->img->player_right)
+            mlx_destroy_image(data->mlx, data->img->player_right);
+        if (data->img->player_down)
+            mlx_destroy_image(data->mlx, data->img->player_down);
+        if (data->img->background)
+            mlx_destroy_image(data->mlx, data->img->background);
+        free(data->img);
+		data->img = NULL;
+    }
+	if (data->win)
+	{
+        mlx_destroy_window(data->mlx, data->win);
+		data->win = NULL;
+	}
+    if (data->mlx)
+    {
+        mlx_destroy_display(data->mlx);
+        free(data->mlx);
+    }
+	if (data->map)
+	{
+    	if (data->map->map)
+    	{
+        	i = 0;
+        	while (data->map->map[i])
+            	free(data->map->map[i++]);
+        	free(data->map->map);
+        	data->map->map = NULL;
+    	}
+    	free(data->map);
+    	data->map = NULL;
+	}
+	
 }
 
 int	ft_key_hook(int keycode, t_data *data)

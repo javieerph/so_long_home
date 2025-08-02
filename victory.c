@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 20:33:01 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/08/02 03:59:08 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/08/02 08:48:12 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 void	winner(t_data *data)
 {
-	mlx_destroy_window(data->mlx, data->win);
-	printf("===================================================\n");
-	printf("|                  !!You won!!                    |\n");
-	printf("| You found all the potions and enter the portal. |\n");
-	printf("| You made %d moves, would you like to try again? |\n",
+	ft_printf("===================================================\n");
+	ft_printf("|                  !!You won!!                    |\n");
+	ft_printf("| You found all the potions and enter the portal. |\n");
+	ft_printf("| You made %d moves, would you like to try again? |\n",
 		data->counter);
-	printf("===================================================\n");
-	free_double_pointer(data);
+	ft_printf("===================================================\n");
+	free_game(data);
 	exit(EXIT_SUCCESS);
 }
 

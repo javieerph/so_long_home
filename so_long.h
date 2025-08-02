@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 12:51:59 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/08/02 03:48:55 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/08/02 08:17:25 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "mlx/mlx.h"
 # include <stdlib.h>
-# include <stdio.h>
 # include <fcntl.h>
 # include "libft/libft.h"
 # include <X11/X.h>
@@ -79,7 +78,7 @@ typedef struct s_data
 
 /* ********** Main and key_hook ********** */
 
-void	free_double_pointer(t_data *data);
+void	free_game(t_data *data);
 int		ft_key_hook(int keycode, t_data *data);
 void	handle_error(t_data *data, char *str, int num);
 int		ft_exit(t_data *data);

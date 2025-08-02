@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   print_ptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/17 20:39:30 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/08/02 08:06:56 by ejavier-         ###   ########.fr       */
+/*   Created: 2025/05/03 03:20:05 by ejavier-          #+#    #+#             */
+/*   Updated: 2025/08/02 08:46:22 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nelem, size_t elsize)
+int	print_ptr(void *ptr)
 {
-	void	*ptr;
+	int		len;
+	char	*hex_str;
 
-	if (elsize != 0 && nelem > SIZE_MAX / elsize)
-		return (NULL);
-	ptr = malloc(nelem * elsize);
-	if (ptr == NULL)
-		return (NULL);
-	ft_bzero(ptr, (nelem * elsize));
-	return (ptr);
+	if (!ptr)
+	{
+		ft_putstr_fd("(nil)", 1);
+		return (5);
+	}
+	ft_putstr_fd("0x", 1);
+	hex_str = ft_itoa_base((unsigned long)ptr, 16);
+	ft_putstr_fd(hex_str, 1);
+	len = ft_strlen(hex_str) + 2;
+	free(hex_str);
+	return (len);
 }

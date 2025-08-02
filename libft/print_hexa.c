@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   print_hexa.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/17 20:39:30 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/08/02 08:06:56 by ejavier-         ###   ########.fr       */
+/*   Created: 2025/05/03 05:28:04 by ejavier-          #+#    #+#             */
+/*   Updated: 2025/08/02 08:46:12 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nelem, size_t elsize)
+int	print_hexa(unsigned int num, int uppercase)
 {
-	void	*ptr;
+	int		len;
+	char	*hex_str;
+	int		i;
 
-	if (elsize != 0 && nelem > SIZE_MAX / elsize)
-		return (NULL);
-	ptr = malloc(nelem * elsize);
-	if (ptr == NULL)
-		return (NULL);
-	ft_bzero(ptr, (nelem * elsize));
-	return (ptr);
+	hex_str = ft_itoa_base(num, 16);
+	if (uppercase)
+	{
+		i = 0;
+		while (hex_str[i])
+		{
+			if (hex_str[i] >= 'a' && hex_str[i] <= 'f')
+				hex_str[i] -= 32;
+			i++;
+		}
+	}
+	ft_putstr_fd(hex_str, 1);
+	len = ft_strlen(hex_str);
+	free(hex_str);
+	return (len);
 }

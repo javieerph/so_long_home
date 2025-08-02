@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 17:07:13 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/07/17 21:10:17 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/08/02 08:42:09 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdint.h>
 # include <stdio.h>
+# include <stdarg.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -60,6 +61,15 @@ char	*read_file(int fd, char *str);
 char	*get_next_line(int fd);
 char	*ft_next(char *buffer);
 char	*ft_line(char *buffer);
-
+int		ft_printf(const char *format, ...);
+int		data_type(va_list args, const char data);
+int		print_num(int n);
+int		print_char(int c);
+int		print_str(char *str);
+char	*ft_itoa_base(unsigned long num, int base);
+int		print_hexa(unsigned int num, int uppercase);
+int		print_uns(unsigned int n);
+int		print_ptr(void *ptr);
+int		print_perc(void);
 
 #endif

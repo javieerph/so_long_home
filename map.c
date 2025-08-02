@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 20:24:58 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/08/02 03:03:47 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/08/02 08:58:08 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	window_size(t_data *data, char **argv)
 }
 
 void	create_map(t_data *data)
-/* This function will fill the map with the corresponding images */
 {
 	data->map->x = 0;
 	data->map->y = 0;

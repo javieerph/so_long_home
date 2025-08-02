@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 20:56:27 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/07/26 00:08:09 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/08/02 05:43:37 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char	*get_next_line(int fd)
 char	*read_file(int fd, char *str)
 {
 	char	*buffer;
+	char	*tmp;
 	int		byte_numb;
 
 	if (!str)
@@ -63,9 +64,11 @@ char	*read_file(int fd, char *str)
 		if (byte_numb == -1)
 			return (free(buffer), free(str), NULL);
 		buffer[byte_numb] = '\0';
-		str = ft_strjoin(str, buffer);
-		if (!str)
-			return (free(buffer), NULL);
+		tmp = ft_strjoin(str, buffer);
+		if (!tmp)
+			return (free(buffer), free(str), NULL);
+		free(str);
+		str = tmp;
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
