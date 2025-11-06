@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 12:50:06 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/08/02 02:50:25 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/11/05 17:08:54 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	check_path_of_collectables(t_data *data, int x, int y)
 		{
 			if (data->map->map[y][x] == 'C')
 			{
-				visited = malloc(sizeof(char *) * (data->size_y + 1));
+				visited = ft_calloc(sizeof(char *), (data->size_y + 1));
 				if (!visited)
 					handle_error(data, "Error!\n allocation failure.\n", 1);
 				visited[data->size_y] = 0;
@@ -114,7 +114,7 @@ void	check_path(t_data *data)
 	x = 0;
 	y = 0;
 	find_px_py(data);
-	visited = malloc(sizeof(char *) * (data->size_y + 1));
+	visited = ft_calloc(sizeof(char *), (data->size_y + 1));
 	if (!visited)
 		handle_error(data, "Error\n! allocation failure.\n", 1);
 	visited[data->size_y] = 0;

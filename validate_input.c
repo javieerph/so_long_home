@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 20:26:45 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/08/02 03:57:30 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/11/06 04:22:26 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static void	ft_open_and_allocate(t_data *data, char *file, int *fd)
 		perror("Error\nFailed to open file");
 		exit(EXIT_FAILURE);
 	}
-	data->map->map = malloc(sizeof(char *) * 1000);
 	if (!data->map->map)
 	{
 		ft_putstr_fd("Error\nMemory allocation failed\n", 2);

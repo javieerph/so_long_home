@@ -6,7 +6,7 @@
 /*   By: ejavier- <ejavier-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 22:37:41 by ejavier-          #+#    #+#             */
-/*   Updated: 2025/08/02 10:25:15 by ejavier-         ###   ########.fr       */
+/*   Updated: 2025/11/06 04:17:00 by ejavier-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 void	handle_error(t_data *data, char *str, int num)
 {
 	if (num)
+	{
 		free_game(data);
+		ft_free_map(data->map);
+	}		
 	ft_putstr_fd(str, 2);
 	exit(EXIT_FAILURE);
 }
@@ -27,7 +30,7 @@ int	ft_exit(t_data *data)
 	ft_printf("|             You can try again......            |\n");
 	ft_printf("==================================================\n");
 	if (data)
-	{
+	{	
 		free_game(data);
 		if(data->map)
 			ft_free_map(data->map);
